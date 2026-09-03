@@ -1,10 +1,35 @@
 <?php
 /**
- * Header Template
+ * jenga-code - Header Template
  *
- * @package CodeAndCuriosity
+ * Displays the shared header used throughout the custom jenga-code
+ * WordPress theme.
+ *
+ * This template creates the opening HTML document structure and the
+ * primary navigation interface used across the jenga-code blog.
+ *
+ * It visually connects the WordPress blog with the main jenga-code
+ * website, programming projects, interactive applications, tutorials
+ * and technical content.
+ *
+ * The header provides:
+ * - Standard WordPress document metadata
+ * - The required wp_head() hook
+ * - The jenga-code image logo
+ * - Main website and blog navigation
+ * - WordPress search functionality
+ * - GitHub, LinkedIn and RSS links
+ * - Newsletter subscription navigation
+ * - The required wp_body_open() hook
+ *
+ * @package JengaCode
  */
 
+
+/*
+ * Prevent this template from being executed directly outside
+ * the WordPress environment.
+ */
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -16,25 +41,51 @@ if (!defined('ABSPATH')) {
 
 <head>
 
+    <!--
+        Use the character encoding configured within WordPress.
+    -->
     <meta charset="<?php bloginfo('charset'); ?>">
 
+
+    <!--
+        Ensure jenga-code scales correctly across desktop,
+        tablet and mobile displays.
+    -->
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <?php wp_head(); ?>
+
+    <?php
+    /*
+     * Required WordPress head hook.
+     *
+     * Allows WordPress, plugins and the jenga-code theme to insert
+     * stylesheets, scripts, metadata and other required resources.
+     */
+    wp_head();
+    ?>
 
 </head>
 
 
 <body <?php body_class(); ?>>
 
-<?php wp_body_open(); ?>
+<?php
+/*
+ * Required WordPress body hook.
+ *
+ * Allows WordPress and installed plugins to output content
+ * immediately after the opening body element.
+ */
+wp_body_open();
+?>
 
 
 <!-- =====================================================
-     HEADER
+     JENGA-CODE
+     SHARED WORDPRESS HEADER
      ===================================================== -->
 
 <header class="site-header">
@@ -43,48 +94,61 @@ if (!defined('ABSPATH')) {
 
 
         <!-- =================================================
-             LOGO
+             JENGA-CODE LOGO
              ================================================= -->
 
+        <!--
+            Main jenga-code site identity.
+
+            The logo image is stored inside the active WordPress
+            theme at:
+
+            /images/logo.png
+
+            get_template_directory_uri() automatically generates
+            the correct public URL for the active theme directory.
+
+            Clicking the logo returns the visitor to the main
+            jenga-code homepage.
+        -->
         <a
             class="site-logo"
             href="<?php echo esc_url(home_url('/')); ?>"
-            aria-label="Code and Curiosity home"
+            aria-label="jenga-code home"
         >
 
-            <span class="logo-symbol">
-                &lt;/&gt;
-            </span>
-
-
-            <span class="logo-copy">
-
-                <span class="logo-name">
-                    Code &amp;
-                    <strong>Curiosity</strong>
-                </span>
-
-                <span class="logo-tagline">
-                    Explore. Build. Understand.
-                </span>
-
-            </span>
+            <img
+                class="logo-image"
+                src="<?php
+                echo esc_url(
+                    get_template_directory_uri()
+                    . '/images/logo.png'
+                );
+                ?>"
+                alt="jenga-code"
+            >
 
         </a>
 
 
 
         <!-- =================================================
-             MAIN NAVIGATION
+             JENGA-CODE MAIN NAVIGATION
              ================================================= -->
 
+        <!--
+            Primary navigation shared between the WordPress blog
+            and the wider jenga-code website.
+        -->
         <nav
             class="main-nav"
             aria-label="Main navigation"
         >
 
 
-            <!-- HOME -->
+            <!-- =============================================
+                 HOME
+                 ============================================= -->
 
             <a
                 href="<?php echo esc_url(home_url('/')); ?>"
@@ -99,8 +163,14 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- BLOG -->
+            <!-- =============================================
+                 BLOG
+                 ============================================= -->
 
+            <!--
+                The Blog link receives the active class while
+                viewing blog-related WordPress content.
+            -->
             <a
                 href="<?php echo esc_url(home_url('/blog/')); ?>"
                 <?php
@@ -119,7 +189,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- PROJECTS -->
+            <!-- =============================================
+                 PROJECTS
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -133,7 +205,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- TUTORIALS -->
+            <!-- =============================================
+                 TUTORIALS
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -147,7 +221,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- NOTES -->
+            <!-- =============================================
+                 NOTES
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -161,7 +237,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- ABOUT -->
+            <!-- =============================================
+                 ABOUT
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -175,7 +253,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- CONTACT -->
+            <!-- =============================================
+                 CONTACT
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -193,9 +273,15 @@ if (!defined('ABSPATH')) {
 
 
         <!-- =================================================
-             SEARCH
+             JENGA-CODE SEARCH
              ================================================= -->
 
+        <!--
+            WordPress search form.
+
+            Search queries use WordPress's standard "s"
+            query parameter.
+        -->
         <form
             class="header-search"
             role="search"
@@ -233,13 +319,15 @@ if (!defined('ABSPATH')) {
 
 
         <!-- =================================================
-             SOCIAL LINKS
+             JENGA-CODE SOCIAL AND EXTERNAL LINKS
              ================================================= -->
 
         <div class="header-social">
 
 
-            <!-- GITHUB -->
+            <!-- =============================================
+                 GITHUB
+                 ============================================= -->
 
             <a
                 href="https://github.com/GeorgeMillerGraduate"
@@ -252,8 +340,16 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- LINKEDIN -->
+            <!-- =============================================
+                 LINKEDIN
+                 ============================================= -->
 
+            <!--
+                This currently points to the Contact section.
+
+                It can later be replaced with the actual LinkedIn
+                profile URL if desired.
+            -->
             <a
                 href="<?php
                 echo esc_url(
@@ -267,7 +363,9 @@ if (!defined('ABSPATH')) {
 
 
 
-            <!-- RSS -->
+            <!-- =============================================
+                 RSS
+                 ============================================= -->
 
             <a
                 href="<?php
@@ -286,7 +384,7 @@ if (!defined('ABSPATH')) {
 
 
         <!-- =================================================
-             SUBSCRIBE
+             NEWSLETTER SUBSCRIPTION
              ================================================= -->
 
         <a

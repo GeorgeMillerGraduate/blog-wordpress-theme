@@ -1,12 +1,33 @@
 <?php
 /**
- * Sidebar Template
+ * jenga-code - Sidebar Template
  *
- * Displays the Code & Curiosity blog sidebar.
+ * Displays the shared sidebar used throughout the custom jenga-code
+ * WordPress blog.
  *
- * @package CodeAndCuriosity
+ * The sidebar provides supplementary content alongside blog posts,
+ * archive pages, search results and other WordPress templates.
+ *
+ * It currently contains:
+ * - Two reserved advertising areas
+ * - A newsletter subscription form
+ * - A Popular Articles section
+ * - Article thumbnails and estimated reading times
+ * - A standard WordPress widget area
+ *
+ * WordPress does not provide built-in post-view statistics, so the
+ * Popular Articles section currently displays the five most recent
+ * published posts. This can later be replaced with genuine popularity
+ * data from analytics or a post-view tracking system.
+ *
+ * @package JengaCode
  */
 
+
+/*
+ * Prevent this template from being executed directly outside
+ * the WordPress environment.
+ */
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -14,7 +35,7 @@ if (!defined('ABSPATH')) {
 
 
 <!-- =====================================================
-     BLOG SIDEBAR CONTENT
+     JENGA-CODE BLOG SIDEBAR
      ===================================================== -->
 
 
@@ -22,6 +43,12 @@ if (!defined('ABSPATH')) {
      TOP ADVERTISEMENT
      ===================================================== -->
 
+<!--
+    Primary advertising area.
+
+    This space is reserved for a future jenga-code sponsor,
+    advertising network or other promotional content.
+-->
 <section class="sidebar-card advert-card">
 
     <span class="sidebar-label">
@@ -31,6 +58,7 @@ if (!defined('ABSPATH')) {
 
     <div class="advert-content">
 
+        <!-- Placeholder advertiser identity -->
         <div class="advert-logo">
             YOUR AD
         </div>
@@ -48,6 +76,12 @@ if (!defined('ABSPATH')) {
         </p>
 
 
+        <!--
+            Placeholder advertising link.
+
+            Replace the href when an advertising destination
+            has been configured.
+        -->
         <a
             class="advert-link"
             href="#"
@@ -56,6 +90,12 @@ if (!defined('ABSPATH')) {
         </a>
 
 
+        <!--
+            Decorative advertisement artwork.
+
+            This element is hidden from assistive technology
+            because it contains no meaningful content.
+        -->
         <div
             class="advert-art"
             aria-hidden="true"
@@ -72,9 +112,15 @@ if (!defined('ABSPATH')) {
 
 
 <!-- =====================================================
-     NEWSLETTER
+     JENGA-CODE NEWSLETTER
      ===================================================== -->
 
+<!--
+    Newsletter subscription area.
+
+    Allows visitors to subscribe for future jenga-code articles,
+    programming projects and resources.
+-->
 <section
     class="sidebar-card newsletter-card"
     id="newsletter"
@@ -91,12 +137,19 @@ if (!defined('ABSPATH')) {
     </p>
 
 
+    <!--
+        Newsletter form.
+
+        The action is currently a placeholder and can later be
+        connected to the newsletter service used by jenga-code.
+    -->
     <form
         class="newsletter-form"
         action="#"
         method="post"
     >
 
+        <!-- Accessible label for the email input -->
         <label
             class="screen-reader-text"
             for="sidebar-newsletter-email"
@@ -134,6 +187,13 @@ if (!defined('ABSPATH')) {
      POPULAR ARTICLES
      ===================================================== -->
 
+<!--
+    Article discovery section.
+
+    WordPress does not maintain post-view statistics by default,
+    so recently published posts are currently used as a temporary
+    substitute for genuinely popular articles.
+-->
 <section class="sidebar-card popular-card">
 
     <span class="sidebar-label">
@@ -146,14 +206,21 @@ if (!defined('ABSPATH')) {
         <?php
 
         /*
-         * For now we use recent posts.
+         * ---------------------------------------------------------
+         * POPULAR / RECENT ARTICLE QUERY
+         * ---------------------------------------------------------
          *
-         * WordPress does not record post-view counts by
-         * default, so there is no reliable built-in
-         * "most popular" query.
+         * Retrieve five recently published jenga-code articles.
          *
-         * Later this can be connected to analytics or
-         * a post-view counter.
+         * WordPress does not record post-view counts by default,
+         * meaning there is no reliable native query for determining
+         * which articles are genuinely the most popular.
+         *
+         * This can later be replaced or extended using:
+         * - Analytics data
+         * - WordPress post metadata
+         * - A custom view counter
+         * - A dedicated analytics/plugin integration
          */
 
         $popular_posts =
@@ -167,8 +234,15 @@ if (!defined('ABSPATH')) {
             );
 
 
+        /*
+         * Check whether the custom WordPress query returned
+         * any published articles.
+         */
         if ($popular_posts->have_posts()) :
 
+            /*
+             * Number the displayed articles from one to five.
+             */
             $article_number = 1;
 
 
@@ -178,13 +252,21 @@ if (!defined('ABSPATH')) {
         ?>
 
 
+                <!--
+                    Individual popular/recent article.
+
+                    The entire article entry links directly to
+                    the corresponding jenga-code blog post.
+                -->
                 <a
                     class="popular-article"
                     href="<?php the_permalink(); ?>"
                 >
 
 
-                    <!-- ARTICLE NUMBER -->
+                    <!-- =========================================
+                         ARTICLE NUMBER
+                         ========================================= -->
 
                     <span class="article-number">
 
@@ -198,10 +280,16 @@ if (!defined('ABSPATH')) {
 
 
 
-                    <!-- THUMBNAIL -->
+                    <!-- =========================================
+                         ARTICLE THUMBNAIL
+                         ========================================= -->
 
                     <?php if (has_post_thumbnail()) : ?>
 
+                        <!--
+                            Display the custom sidebar-thumbnail
+                            image size registered in functions.php.
+                        -->
                         <div class="article-thumbnail">
 
                             <?php
@@ -219,6 +307,10 @@ if (!defined('ABSPATH')) {
                     <?php else : ?>
 
 
+                        <!--
+                            Text-based fallback displayed when the
+                            article does not have a featured image.
+                        -->
                         <div
                             class="
                                 article-thumbnail
@@ -229,8 +321,15 @@ if (!defined('ABSPATH')) {
                             <?php
 
                             /*
-                             * Use the first character of the
-                             * article title when no image exists.
+                             * Use the first character of the article
+                             * title as its thumbnail placeholder.
+                             *
+                             * The title is stripped of HTML before the
+                             * first character is extracted and converted
+                             * to uppercase.
+                             *
+                             * If no title is available, use the familiar
+                             * programming symbol as a final fallback.
                              */
 
                             $title =
@@ -262,20 +361,30 @@ if (!defined('ABSPATH')) {
 
 
 
-                    <!-- ARTICLE INFORMATION -->
+                    <!-- =========================================
+                         ARTICLE INFORMATION
+                         ========================================= -->
 
                     <div class="article-info">
 
+
+                        <!-- Article title -->
                         <h3>
                             <?php the_title(); ?>
                         </h3>
 
 
+                        <!--
+                            Estimated article reading time.
+
+                            The shared jenga-code helper function is
+                            defined in the theme's functions.php file.
+                        -->
                         <p>
 
                             <?php
                             echo esc_html(
-                                code_and_curiosity_reading_time()
+                                jenga_code_reading_time()
                             );
                             ?>
 
@@ -289,11 +398,21 @@ if (!defined('ABSPATH')) {
 
         <?php
 
+                /*
+                 * Increment the displayed article position.
+                 */
                 $article_number++;
 
             endwhile;
 
 
+            /*
+             * Restore the original WordPress global post object.
+             *
+             * This is required after using a secondary WP_Query so
+             * that subsequent template functions continue working
+             * with the original page or post.
+             */
             wp_reset_postdata();
 
 
@@ -301,6 +420,10 @@ if (!defined('ABSPATH')) {
         ?>
 
 
+            <!--
+                Fallback displayed when there are currently
+                no published jenga-code articles.
+            -->
             <div class="sidebar-empty">
 
                 <p>
@@ -317,6 +440,9 @@ if (!defined('ABSPATH')) {
 
 
 
+    <!--
+        Link to the complete jenga-code article archive.
+    -->
     <a
         class="sidebar-view-all"
         href="<?php echo esc_url(home_url('/blog/')); ?>"
@@ -332,6 +458,15 @@ if (!defined('ABSPATH')) {
      WORDPRESS WIDGET AREA
      ===================================================== -->
 
+<!--
+    Standard WordPress widget area.
+
+    The blog-sidebar widget location is registered in the
+    jenga-code functions.php file.
+
+    Widgets assigned to this location through WordPress will
+    automatically appear here.
+-->
 <?php if (is_active_sidebar('blog-sidebar')) : ?>
 
     <div class="sidebar-widgets">
@@ -352,6 +487,12 @@ if (!defined('ABSPATH')) {
      SECOND ADVERTISEMENT
      ===================================================== -->
 
+<!--
+    Secondary advertising area.
+
+    Provides another reserved sponsor position further down the
+    sidebar without inserting advertising directly into articles.
+-->
 <section class="sidebar-card advert-card advert-small">
 
     <span class="sidebar-label">
@@ -373,6 +514,9 @@ if (!defined('ABSPATH')) {
             </p>
 
 
+            <!--
+                Placeholder advertising destination.
+            -->
             <a
                 class="advert-link"
                 href="#"
@@ -383,6 +527,9 @@ if (!defined('ABSPATH')) {
         </div>
 
 
+        <!--
+            Decorative artwork for the secondary advertisement.
+        -->
         <div
             class="small-ad-art"
             aria-hidden="true"

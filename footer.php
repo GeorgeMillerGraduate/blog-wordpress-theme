@@ -1,19 +1,56 @@
 <?php
 /**
- * Footer Template
+ * jenga-code - Footer Template
  *
- * @package CodeAndCuriosity
+ * Displays the shared footer used throughout the custom jenga-code
+ * WordPress theme.
+ *
+ * The footer provides consistent branding and navigation between
+ * the WordPress blog and the wider jenga-code website. It also
+ * contains the newsletter subscription area, copyright information
+ * and links to external/social resources.
+ *
+ * The footer provides:
+ * - jenga-code branding and site description
+ * - Navigation to the main areas of the website
+ * - Information and legal links
+ * - Newsletter subscription form
+ * - Automatically updated copyright year
+ * - GitHub, LinkedIn and RSS links
+ * - The required WordPress wp_footer() hook
+ *
+ * @package JengaCode
  */
 ?>
+
+<!-- =========================================================
+     JENGA-CODE
+     SHARED WORDPRESS FOOTER
+     ========================================================= -->
 
 <footer class="site-footer">
 
     <div class="footer-container">
 
+        <!-- =====================================================
+             MAIN FOOTER CONTENT
+             ===================================================== -->
+
         <div class="footer-main">
+
+            <!-- =================================================
+                 JENGA-CODE BRANDING
+                 ================================================= -->
 
             <div class="footer-brand">
 
+                <!--
+                    Main jenga-code footer logo.
+
+                    Links back to the website homepage so visitors
+                    can easily return to the main jenga-code site
+                    from anywhere within the WordPress blog.
+                -->
                 <a
                     class="footer-logo"
                     href="<?php echo esc_url(home_url('/')); ?>"
@@ -23,7 +60,7 @@
                     </span>
 
                     <span class="footer-logo-text">
-                        Code &amp; Curiosity
+                        jenga-code
                     </span>
                 </a>
 
@@ -40,12 +77,20 @@
             </div>
 
 
+            <!-- =================================================
+                 WEBSITE NAVIGATION
+                 ================================================= -->
+
             <div class="footer-column">
 
                 <h2 class="footer-heading">
                     Explore
                 </h2>
 
+                <!--
+                    Links to the primary areas of the jenga-code
+                    website and WordPress blog.
+                -->
                 <nav
                     class="footer-navigation"
                     aria-label="Footer navigation"
@@ -76,12 +121,20 @@
             </div>
 
 
+            <!-- =================================================
+                 INFORMATION NAVIGATION
+                 ================================================= -->
+
             <div class="footer-column">
 
                 <h2 class="footer-heading">
                     Information
                 </h2>
 
+                <!--
+                    Secondary navigation for information about
+                    jenga-code and important site policies.
+                -->
                 <nav
                     class="footer-navigation"
                     aria-label="Information navigation"
@@ -104,6 +157,10 @@
             </div>
 
 
+            <!-- =================================================
+                 NEWSLETTER SUBSCRIPTION
+                 ================================================= -->
+
             <div class="footer-column footer-subscribe">
 
                 <h2 class="footer-heading">
@@ -115,6 +172,13 @@
                     delivered straight to your inbox.
                 </p>
 
+                <!--
+                    Newsletter subscription form.
+
+                    The form can later be connected to the chosen
+                    newsletter or mailing-list service used by
+                    jenga-code.
+                -->
                 <form
                     class="footer-subscribe-form"
                     action="#"
@@ -154,14 +218,30 @@
         </div>
 
 
+        <!-- =====================================================
+             FOOTER BOTTOM
+             ===================================================== -->
+
         <div class="footer-bottom">
 
+            <!--
+                Copyright notice.
+
+                wp_date() automatically uses the current year,
+                preventing the jenga-code copyright notice from
+                requiring a manual yearly update.
+            -->
             <p class="footer-copyright">
                 &copy;
                 <?php echo esc_html(wp_date('Y')); ?>
-                Code &amp; Curiosity.
+                jenga-code.
                 All rights reserved.
             </p>
+
+
+            <!-- =================================================
+                 SOCIAL AND RSS LINKS
+                 ================================================= -->
 
             <div class="footer-social">
 
@@ -179,6 +259,10 @@
                     in
                 </a>
 
+                <!--
+                    WordPress automatically provides the URL for
+                    the jenga-code blog's RSS 2.0 feed.
+                -->
                 <a
                     href="<?php echo esc_url(get_bloginfo('rss2_url')); ?>"
                     aria-label="RSS Feed"
@@ -195,7 +279,16 @@
 </footer>
 
 
-<?php wp_footer(); ?>
+<?php
+/*
+ * Required WordPress footer hook.
+ *
+ * Allows WordPress itself, plugins and the jenga-code theme to
+ * enqueue scripts and output other required content immediately
+ * before the closing body element.
+ */
+wp_footer();
+?>
 
 </body>
 </html>
